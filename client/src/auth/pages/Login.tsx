@@ -1,16 +1,36 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   Avatar,
   Box,
   Button,
   Container,
-  Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link } from "react-router-dom";
+
+import { authService } from "../services/auth.service";
 
 export const Login = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
+      await authService.login(data as any);
+    } catch (error: unknown) {
+      return toast.error(error as string);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Container
       component="main"
@@ -30,11 +50,7 @@ export const Login = () => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <Box
-          component="form"
-          sx={{ mt: 1 }}
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <Box component="form" sx={{ mt: 1 }} onSubmit={onLogin}>
           <TextField
             margin="normal"
             required
@@ -62,8 +78,9 @@ export const Login = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isSubmitting}
           >
-            Ingresar
+            {isSubmitting ? "Ingresando" : "Ingresar"}
           </Button>
           <Typography component="span" fontSize={14}>
             No tienes cuenta? <Link to="/auth/register">Regístrate</Link>
