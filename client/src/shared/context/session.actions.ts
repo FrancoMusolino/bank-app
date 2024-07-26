@@ -1,4 +1,4 @@
-import { StartSessionAction } from "./session.reducer";
+import { EndSessionAction, StartSessionAction } from "./session.reducer";
 
 export enum SESSION_ACTION_TYPES {
   START_SESSION = "START_SESSION",
@@ -11,4 +11,8 @@ export const startSession = (
 ): StartSessionAction => ({
   type: SESSION_ACTION_TYPES.START_SESSION,
   payload,
+});
+
+export const endSession = (): EndSessionAction => ({
+  type: SESSION_ACTION_TYPES.END_SESSION,
 });
