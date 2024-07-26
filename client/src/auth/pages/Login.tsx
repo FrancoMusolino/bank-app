@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Avatar,
@@ -12,8 +12,12 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { authService } from "../services/auth.service";
+import { useSession } from "../../shared/context/session.context";
+import { startSession } from "../../shared/context/session.actions";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const { dispatch } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +27,11 @@ export const Login = () => {
     try {
       const formData = new FormData(e.currentTarget);
       const data = Object.fromEntries(formData.entries());
-      await authService.login(data as any);
+
+      const res = await authService.login(data as any);
+
+      dispatch(startSession({ ...res, accountId: null }));
+      return navigate("/", { replace: true });
     } catch (error: unknown) {
       return toast.error(error as string);
     } finally {

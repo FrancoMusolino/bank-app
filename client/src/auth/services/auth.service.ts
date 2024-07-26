@@ -20,10 +20,6 @@ type AuthRes = {
 };
 
 class AuthService extends Fetcher {
-  constructor() {
-    super();
-  }
-
   login(data: LoginReq) {
     return this.post<LoginReq, AuthRes>("/auth/login", data);
   }

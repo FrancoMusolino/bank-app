@@ -8,9 +8,9 @@ export const Root = () => {
     return <Navigate to="/auth/login" replace />;
   }
 
-  if (!session.accountId) {
-    return <Navigate to="/crear-cuenta" replace />;
-  }
+  // if (!session.accountId) {
+  //   return <Navigate to="/crear-cuenta" replace />;
+  // }
 
   return <Outlet />;
 };

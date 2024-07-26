@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Avatar,
@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { authService } from "../services/auth.service";
 
 export const Register = () => {
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onRegister = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +24,11 @@ export const Register = () => {
     try {
       const formData = new FormData(e.currentTarget);
       const data = Object.fromEntries(formData.entries());
+
       await authService.register(data as any);
+
+      toast.success("Registro exitoso, por favor inicia sesión");
+      return navigate("/auth/login");
     } catch (error: unknown) {
       return toast.error(error as string);
     } finally {
@@ -81,7 +86,6 @@ export const Register = () => {
             label="Email"
             name="email"
             autoComplete="email"
-            autoFocus
           />
           <TextField
             margin="normal"
