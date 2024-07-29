@@ -15,7 +15,7 @@ export const Root = () => {
   return (
     <Container
       component="main"
-      maxWidth="xs"
+      maxWidth="lg"
       style={{ width: "100%", margin: "auto" }}
     >
       <AppBar>
