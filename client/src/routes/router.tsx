@@ -4,16 +4,22 @@ import {
   Navigate,
   Route,
 } from "react-router-dom";
+
 import { Root } from "./root";
+
+// PAGES
 import { Login } from "../auth/pages/Login";
 import { Register } from "../auth/pages/Register";
+import { Home } from "../home/pages/Home";
+import { CreateAccount } from "../home/pages/CreateAccount";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* ROOT */}
       <Route path="/" element={<Root />}>
-        <Route index element={<h1>Home</h1>} />
+        <Route index element={<Home />} />
+        <Route path="crear-cuenta" element={<CreateAccount />} />
       </Route>
 
       {/* AUTH */}

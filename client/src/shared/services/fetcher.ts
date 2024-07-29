@@ -49,11 +49,11 @@ axios.interceptors.response.use(
 export abstract class Fetcher {
   protected readonly fetcher = axios;
 
-  protected get<T>(url: string): Promise<T> {
-    return this.fetcher.get<T>(url) as Promise<T>;
+  protected get<T>(url: string, headers?: object): Promise<T> {
+    return this.fetcher.get<T>(url, { headers }) as Promise<T>;
   }
 
-  protected post<T, U>(url: string, data: T): Promise<U> {
-    return this.fetcher.post<T, U>(url, data) as Promise<U>;
+  protected post<T, U>(url: string, data: T, headers?: object): Promise<U> {
+    return this.fetcher.post<T, U>(url, data, { headers }) as Promise<U>;
   }
 }

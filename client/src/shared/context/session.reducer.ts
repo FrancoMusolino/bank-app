@@ -22,9 +22,17 @@ export type StartSessionAction = Action<
   SessionState
 >;
 
+export type SetAccountAction = Action<
+  SESSION_ACTION_TYPES.SET_ACCOUNT,
+  Pick<SessionState, "accountId">
+>;
+
 export type EndSessionAction = Action<SESSION_ACTION_TYPES.END_SESSION>;
 
-export type SessionAction = StartSessionAction | EndSessionAction;
+export type SessionAction =
+  | StartSessionAction
+  | SetAccountAction
+  | EndSessionAction;
 
 export const sessionReducer = (
   state: SessionState,
@@ -35,9 +43,9 @@ export const sessionReducer = (
       return { ...state, ...action.payload };
     }
 
-    // case SESSION_ACTION_TYPES.SET_ACCOUNT: {
-    //   return state;
-    // }
+    case SESSION_ACTION_TYPES.SET_ACCOUNT: {
+      return { ...state, accountId: action.payload!.accountId };
+    }
 
     case SESSION_ACTION_TYPES.END_SESSION: {
       return sessionInitialState;

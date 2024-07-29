@@ -12,12 +12,12 @@ export const Root = () => {
     return <Navigate to="/auth/login" replace />;
   }
 
-  // if (!session.accountId) {
-  //   return <Navigate to="/crear-cuenta" replace />;
-  // }
-
   return (
-    <>
+    <Container
+      component="main"
+      maxWidth="xs"
+      style={{ width: "100%", margin: "auto" }}
+    >
       <AppBar>
         <Container maxWidth="xl">
           <Stack
@@ -52,6 +52,6 @@ export const Root = () => {
         </Container>
       </AppBar>
       <Outlet />
-    </>
+    </Container>
   );
 };

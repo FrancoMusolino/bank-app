@@ -29,8 +29,7 @@ export const Login = () => {
       const data = Object.fromEntries(formData.entries());
 
       const res = await authService.login(data as any);
-
-      dispatch(startSession({ ...res, accountId: null }));
+      dispatch(startSession({ ...res, accountId: res.accountId ?? null }));
       return navigate("/", { replace: true });
     } catch (error: unknown) {
       return toast.error(error as string);

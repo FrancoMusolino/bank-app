@@ -18,6 +18,7 @@ export class CreateAccountDto {
 
   @IsNotEmpty({ message: 'El número de cuenta es requerido' })
   @IsInt({ message: 'El número de cuenta es inválido' })
+  @IsPositive({ message: 'El número de cuenta es inválido' })
   number: number;
 
   @IsOptional()

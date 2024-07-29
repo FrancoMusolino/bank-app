@@ -21,7 +21,10 @@ type AuthRes = {
 
 class AuthService extends Fetcher {
   login(data: LoginReq) {
-    return this.post<LoginReq, AuthRes>("/auth/login", data);
+    return this.post<LoginReq, AuthRes & { accountId?: string }>(
+      "/auth/login",
+      data
+    );
   }
 
   register(data: RegisterReq) {
