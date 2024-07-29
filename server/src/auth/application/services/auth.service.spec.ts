@@ -110,6 +110,7 @@ describe('Auth Service', () => {
       expect(data).toMatchObject({
         ...payload,
         token: jwtMock.sign.getMockImplementation()(),
+        accountId: user.accountId,
       });
     });
 

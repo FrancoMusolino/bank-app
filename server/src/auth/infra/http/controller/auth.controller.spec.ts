@@ -82,6 +82,7 @@ describe('AuthController', () => {
       firstname: 'Test',
       lastname: 'Test',
       token: 'asd',
+      accountId: 'asd',
     });
     authServiceMock.login.mockResolvedValueOnce(login);
 

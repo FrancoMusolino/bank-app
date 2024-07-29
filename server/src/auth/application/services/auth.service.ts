@@ -42,7 +42,9 @@ export class AuthService {
     return Result.ok({ ...payload, token });
   }
 
-  async login(data: LoginDto): Promise<Result<AuthResponse>> {
+  async login(
+    data: LoginDto,
+  ): Promise<Result<AuthResponse & { accountId: string }>> {
     const userOrError = this.usersRepository.findOneByEmail(data.email);
     if (userOrError.isFailure) {
       return Result.fail('Credenciales inválidas');
@@ -64,6 +66,6 @@ export class AuthService {
 
     const token = this.jwt.sign(payload);
 
-    return Result.ok({ ...payload, token });
+    return Result.ok({ ...payload, token, accountId: user.getAccount() });
   }
 }
