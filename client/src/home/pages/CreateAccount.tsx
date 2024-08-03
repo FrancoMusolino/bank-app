@@ -82,7 +82,6 @@ export const CreateAccount = () => {
           label="Balance (USD)"
           type="number"
           id="balance"
-          autoComplete="current-password"
           inputProps={{ min: 0, step: 0.01 }}
         />
 

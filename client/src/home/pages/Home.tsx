@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { Box, Stack, Typography } from "@mui/material";
 
 import { useSession } from "../../shared/context/session.context";
 import { accountsService, GetAccountRes } from "../services/accounts.service";
-import { Box, Stack, Typography } from "@mui/material";
 import { formatMoney } from "../../shared/utils";
+import { TransactionsTable } from "../components/TransactionsTable";
+import { MakeTransactionModal } from "../components/MakeTransactionModal";
 
 export const Home = () => {
   const { session } = useSession();
@@ -33,7 +35,7 @@ export const Home = () => {
     <Stack gap={8}>
       {/* ACCOUNT INFO */}
       <Box>
-        <Typography component="h2" variant="h4">
+        <Typography component="h2" variant="h5">
           Información de cuenta
         </Typography>
         <Typography>
@@ -49,9 +51,18 @@ export const Home = () => {
 
       {/* TRANSACTIONS */}
       <Box>
-        <Typography component="h2" variant="h4">
-          Transacciones
-        </Typography>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography component="h2" variant="h5">
+            Transacciones
+          </Typography>
+          <MakeTransactionModal />
+        </Stack>
+
+        {accountInfo?.transactions.length === 0 ? (
+          <Typography>Cuenta sin transacciones</Typography>
+        ) : (
+          <TransactionsTable />
+        )}
       </Box>
     </Stack>
   );
