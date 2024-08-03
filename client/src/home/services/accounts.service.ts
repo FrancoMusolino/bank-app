@@ -5,6 +5,13 @@ export enum TransactionType {
   DEPOSIT = "DEPOSIT",
 }
 
+export type Transaction = {
+  id: string;
+  type: TransactionType;
+  amount: number;
+  accountId: string;
+};
+
 type CreateAccountReq = {
   name: string;
   number: number;
@@ -21,12 +28,7 @@ export type GetAccountRes = {
   number: number;
   balance: number;
   ownerId: string;
-  transactions: {
-    id: string;
-    type: TransactionType;
-    amount: number;
-    accountId: string;
-  }[];
+  transactions: Transaction[];
 };
 
 type MakeTransactionReq = {

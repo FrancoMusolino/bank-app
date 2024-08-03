@@ -35,7 +35,7 @@ export const Home = () => {
     <Stack gap={8}>
       {/* ACCOUNT INFO */}
       <Box>
-        <Typography component="h2" variant="h5">
+        <Typography component="h2" variant="h5" mb={4}>
           Información de cuenta
         </Typography>
         <Typography>
@@ -51,17 +51,17 @@ export const Home = () => {
 
       {/* TRANSACTIONS */}
       <Box>
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" mb={4}>
           <Typography component="h2" variant="h5">
             Transacciones
           </Typography>
           <MakeTransactionModal />
         </Stack>
 
-        {accountInfo?.transactions.length === 0 ? (
+        {!accountInfo || accountInfo?.transactions.length === 0 ? (
           <Typography>Cuenta sin transacciones</Typography>
         ) : (
-          <TransactionsTable />
+          <TransactionsTable transactions={accountInfo.transactions ?? []} />
         )}
       </Box>
     </Stack>

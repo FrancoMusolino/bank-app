@@ -1,5 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { AppBar, Button, Container, Stack, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 import { useSession } from "../shared/context/session.context";
@@ -13,12 +20,8 @@ export const Root = () => {
   }
 
   return (
-    <Container
-      component="main"
-      maxWidth="lg"
-      style={{ width: "100%", margin: "auto" }}
-    >
-      <AppBar>
+    <>
+      <AppBar sx={{ maxWidth: "1400px", margin: "0 auto" }}>
         <Container maxWidth="xl">
           <Stack
             direction="row"
@@ -51,7 +54,13 @@ export const Root = () => {
           </Stack>
         </Container>
       </AppBar>
-      <Outlet />
-    </Container>
+      <Container
+        component="main"
+        maxWidth="lg"
+        style={{ width: "100%", margin: "auto", marginTop: "6rem" }}
+      >
+        <Outlet />
+      </Container>
+    </>
   );
 };
