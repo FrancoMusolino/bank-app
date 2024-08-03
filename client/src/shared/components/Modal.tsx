@@ -13,8 +13,12 @@ const style = {
   p: 4,
 };
 
-type ModalProps = React.PropsWithChildren & {
+type ModalProps = {
   trigger: React.ReactElement;
+  children: (props: {
+    handleClose: () => void;
+    open: boolean;
+  }) => React.ReactElement;
 };
 
 export function Modal({ children, trigger }: ModalProps) {
@@ -31,7 +35,7 @@ export function Modal({ children, trigger }: ModalProps) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{children}</Box>
+        <Box sx={style}>{children({ handleClose, open })}</Box>
       </MUIModal>
     </div>
   );

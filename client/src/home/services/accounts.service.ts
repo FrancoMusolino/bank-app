@@ -29,6 +29,11 @@ export type GetAccountRes = {
   }[];
 };
 
+type MakeTransactionReq = {
+  amount: number;
+  type: TransactionType;
+};
+
 class AccountsService extends Fetcher {
   getAccount(accountId: string, token: string) {
     return this.get<GetAccountRes>(`/accounts/${accountId}`, {
@@ -38,6 +43,12 @@ class AccountsService extends Fetcher {
 
   createAccount(data: CreateAccountReq, token: string) {
     return this.post<CreateAccountReq, CreateAccountRes>("/accounts", data, {
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
+  makeTransaction(data: MakeTransactionReq, token: string) {
+    return this.post<MakeTransactionReq, null>("/transactions", data, {
       Authorization: `Bearer ${token}`,
     });
   }

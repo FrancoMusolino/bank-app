@@ -6,6 +6,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { accountsService } from "../services/accounts.service";
 import { useSession } from "../../shared/context/session.context";
 import { setAccount } from "../../shared/context/session.actions";
+import { Cents } from "../../shared/utils/cents";
 
 export const CreateAccount = () => {
   const navigate = useNavigate();
@@ -23,7 +24,9 @@ export const CreateAccount = () => {
       const res = await accountsService.createAccount(
         {
           name: data.name as string,
-          balance: data.balance ? Number(data.balance) * 100 : undefined,
+          balance: data.balance
+            ? Cents.fromString(data.balance.toString())
+            : undefined,
           number: Number(data.number),
         },
         session.token
