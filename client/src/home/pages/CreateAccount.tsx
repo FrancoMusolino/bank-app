@@ -88,9 +88,14 @@ export const CreateAccount = () => {
 
         <Button
           type="submit"
-          fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            mt: 3,
+            mb: 2,
+            width: "30%",
+            display: "flex",
+            marginInline: "auto",
+          }}
           disabled={isSubmitting}
         >
           {isSubmitting ? "Creando" : "Crear"}
