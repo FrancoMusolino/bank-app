@@ -1,13 +1,9 @@
 FROM node:alpine    
 
-WORKDIR /server
+WORKDIR /app
 
-COPY ./server/package*.json ./
-COPY ./server/tsconfig.json ./
-COPY ./server/jest.config.ts ./
-
-COPY ./server/src ./src
-COPY ./server/.env ./
+COPY ./package*.json .
+COPY . .
 
 RUN npm install -g typescript
 RUN npm install

@@ -25,5 +25,3 @@ La API se iniciará en [http://localhost:3000](http://localhost:3000)
 ```bash
 docker exec -it node-server npm run test
 ```
-
-La API se iniciará en [http://localhost:3000](http://localhost:3000)

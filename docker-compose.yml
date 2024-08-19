@@ -1,9 +1,11 @@
+version: "3"
 services:
   node-server:
-    build:
-      context: .
-      dockerfile: ./server/Dockerfile
-    image: bank-node-server:latest
     container_name: node-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: bank-node-server:latest
+    env_file: ./server/.env
     ports:
       - "3000:3000"
